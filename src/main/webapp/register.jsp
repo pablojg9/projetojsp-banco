@@ -20,7 +20,7 @@
                 <td><input name="passwordRegister" type="password"></td>
             </tr>
             <tr>
-                <td><button name="enviar" type="submit">Enviar</button></td>
+                <td><button type="submit">Enviar</button></td>
             </tr>
         </table>
     </form>

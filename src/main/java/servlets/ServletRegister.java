@@ -35,7 +35,7 @@ public class ServletRegister extends HttpServlet {
 
             if (modelLogin.getLogin().equalsIgnoreCase("admin") && modelLogin.getPassword()
                     .equalsIgnoreCase("admin")) {
-                request.getSession().setAttribute("user", modelLogin.getLogin());
+                request.getSession().setAttribute("userRegister", modelLogin.getLogin());
 
                 if (url == null || url.equals("null")) {
                     url = "/index.jsp";
@@ -46,13 +46,13 @@ public class ServletRegister extends HttpServlet {
 
             } else {
                 requestDispatcher = request.getRequestDispatcher("register.jsp");
-                request.setAttribute("message", Message.MESSAGE_REGISTER);
+                request.setAttribute("message", Message.MESSAGE_ERRO_REGISTER);
             }
             requestDispatcher.forward(request, response);
 
         } else {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("register.jsp");
-            request.setAttribute("message", Message.MESSAGE_REGISTER);
+            request.setAttribute("message", Message.MESSAGE_ERRO_REGISTER);
             requestDispatcher.forward(request, response);
         }
 

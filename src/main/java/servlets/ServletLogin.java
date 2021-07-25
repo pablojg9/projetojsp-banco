@@ -42,12 +42,17 @@ public class ServletLogin extends HttpServlet {
                    .equalsIgnoreCase("admin")) {
                request.getSession().setAttribute("user", modelLogin.getLogin());
 
+               request.setAttribute("msg", Message.MESSAGE_SUCCESS_REGISTER);
+
+
                if (url == null || url.equals("null")) {
                     url = "main/main.jsp";
                }
 
                requestDispatcher = request.getRequestDispatcher(url);
                requestDispatcher.forward(request, response);
+
+
 
            } else {
                requestDispatcher = request.getRequestDispatcher("/index.jsp");

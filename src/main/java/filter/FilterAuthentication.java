@@ -38,18 +38,16 @@ public class FilterAuthentication implements Filter {
         CONNECTION = SingleConnection.getConnection();
     }
 
-
     //Intercepta as requisições e a respostas do sistema
     //Tudo o que fizermos do sistema irá passar pelo metodo doFilter()
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         try {
-
-
             HttpServletRequest req = (HttpServletRequest) request;
             HttpSession hasSession = req.getSession();
 
             String userLogged = (String) hasSession.getAttribute("user");
+            String userRegister = (String) hasSession.getAttribute("userRegister");
 
             String urlAuthenticate = req.getServletPath();//URL está sendo acessado
 
@@ -60,8 +58,17 @@ public class FilterAuthentication implements Filter {
 
                 requestDispatcher.forward(request, response);
 
+
                 return; // Para a execução e redireciona para o login
-            } else {
+            }
+            if (userRegister == null && !urlAuthenticate.equalsIgnoreCase("/main/ServletRegister")) {
+                RequestDispatcher requestRegister = request.getRequestDispatcher("/register.jsp?url=" + urlAuthenticate);
+                requestRegister.forward(request, response);
+                return;
+            }
+
+
+            else {
                 chain.doFilter(request, response);
             }
             CONNECTION.commit();
