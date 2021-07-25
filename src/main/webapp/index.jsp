@@ -24,7 +24,7 @@
         </table>
     </form>
 
-    <form method="post" action="">
+    <form method="post" action="register.jsp">
         <button>Cadastrar</button>
 
 
