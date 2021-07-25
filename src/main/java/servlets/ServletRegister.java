@@ -38,21 +38,21 @@ public class ServletRegister extends HttpServlet {
                 request.getSession().setAttribute("user", modelLogin.getLogin());
 
                 if (url == null || url.equals("null")) {
-                    url = "/register.jsp";
+                    url = "/index.jsp";
                 }
 
                 requestDispatcher = request.getRequestDispatcher(url);
                 requestDispatcher.forward(request, response);
 
             } else {
-                requestDispatcher = request.getRequestDispatcher("/register.jsp");
-                request.setAttribute("message", Message.MESSAGE_ERROR);
+                requestDispatcher = request.getRequestDispatcher("register.jsp");
+                request.setAttribute("message", Message.MESSAGE_REGISTER);
             }
             requestDispatcher.forward(request, response);
 
         } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
-            request.setAttribute("message", Message.MESSAGE_ERROR);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("register.jsp");
+            request.setAttribute("message", Message.MESSAGE_REGISTER);
             requestDispatcher.forward(request, response);
         }
 

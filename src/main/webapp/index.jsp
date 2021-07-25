@@ -25,7 +25,7 @@
     </form>
 
     <form method="post" action="register.jsp">
-        <button>Cadastrar</button>
+        <button >Cadastrar</button>
 
 
     </form>
