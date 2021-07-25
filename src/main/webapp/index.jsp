@@ -23,6 +23,13 @@
             </tr>
         </table>
     </form>
+
+    <form method="post" action="">
+        <button>Cadastrar</button>
+
+
+    </form>
+
     <h4>${message}</h4>
 
 </body>

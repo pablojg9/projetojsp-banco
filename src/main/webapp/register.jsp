@@ -14,7 +14,7 @@
             </tr>
             <tr>
                 <td><label>Senha: </label></td>
-                <td><input name="senhaRegister" type="text"></td>
+                <td><input name="passwordRegister" type="text"></td>
             </tr>
         </table>
 
