@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Login;
+import utils.Message;
 
 import java.io.IOException;
 
@@ -14,43 +15,45 @@ import java.io.IOException;
 public class ServletRegister extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String loginRegister = req.getParameter("loginRegister");
-        String passwordRegister = req.getParameter("passwordRegister");
-        String url = req.getParameter("url");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String loginRegister = request.getParameter("loginRegister");
+        String passwordRegister = request.getParameter("passwordRegister");
+        String url = request.getParameter("url");
 
 
-        if(loginRegister != null && !loginRegister.isEmpty() && passwordRegister != null && !passwordRegister.isEmpty()) {
+        if (loginRegister != null && !loginRegister.isEmpty() && passwordRegister != null && !passwordRegister.isEmpty()) {
             Login modelLogin = new Login();
             modelLogin.setLogin(loginRegister);
             modelLogin.setPassword(passwordRegister);
 
             RequestDispatcher requestDispatcher;
 
-            if (modelLogin.getLogin().equalsIgnoreCase("admin")
-                    && modelLogin.getPassword().equalsIgnoreCase("admin")) {
+            if (modelLogin.getLogin().equalsIgnoreCase("admin") && modelLogin.getPassword()
+                    .equalsIgnoreCase("admin")) {
+                request.getSession().setAttribute("user", modelLogin.getLogin());
 
-                req.getSession().setAttribute("user", modelLogin.getLogin());
+                if (url == null || url.equals("null")) {
+                    url = "/register.jsp";
+                }
 
+                requestDispatcher = request.getRequestDispatcher(url);
+                requestDispatcher.forward(request, response);
 
-                requestDispatcher = req.getRequestDispatcher("url");
-                requestDispatcher.forward(req, resp);
             } else {
-                requestDispatcher = req.getRequestDispatcher("/register.jsp");
-                req.setAttribute("msg", "Login e senha Vazios!");
+                requestDispatcher = request.getRequestDispatcher("/register.jsp");
+                request.setAttribute("message", Message.MESSAGE_ERROR);
             }
-            requestDispatcher.forward(req, resp);
+            requestDispatcher.forward(request, response);
 
-
-
-
-
-
+        } else {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/register.jsp");
+            request.setAttribute("message", Message.MESSAGE_ERROR);
+            requestDispatcher.forward(request, response);
         }
 
 

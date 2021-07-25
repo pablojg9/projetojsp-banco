@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Cadastro</title>
@@ -15,12 +16,12 @@
             </tr>
             <tr>
                 <td><label>Senha: </label></td>
-                <td><input name="passwordRegister" type="text"></td>
+                <td><input name="passwordRegister" type="password"></td>
             </tr>
         </table>
 
         <button type="submit">Cadastrar</button>
     </form>
-    <h4>${msg}</h4>
+    <h4>${message}</h4>
 </body>
 </html>
