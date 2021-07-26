@@ -30,4 +30,22 @@ public class UserDao {
             e.printStackTrace();
         }
     }
+
+    public void update(Login login) {
+
+        try {
+            String sql = "UPDATE bancojsplinux SET login = ?, senha = ? WHERE ";
+            PreparedStatement updateStatement = connection.prepareStatement(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+    }
+
+
+
 }
