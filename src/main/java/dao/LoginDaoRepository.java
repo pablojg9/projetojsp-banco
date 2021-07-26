@@ -4,6 +4,7 @@ import connection.SingleConnection;
 import model.Login;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class LoginDaoRepository {
 
@@ -17,7 +18,17 @@ public class LoginDaoRepository {
 
     }
 
-    public boolean validateAuthentication() {
+    public boolean validateAuthentication(Login modelLogin) {
+        try {
+            String sql = "SELECT * FROM model_login WHERE login = ?, senha = ?";
+            PreparedStatement validateStatement = connection.prepareStatement(sql);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
 
         return false;
     }
