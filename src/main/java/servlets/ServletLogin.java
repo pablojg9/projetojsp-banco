@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 
+import dao.LoginDaoRepository;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +17,8 @@ public class ServletLogin extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
+    private LoginDaoRepository loginDaoRepository = new LoginDaoRepository();
+
     public ServletLogin() {
 
     }
@@ -27,43 +30,44 @@ public class ServletLogin extends HttpServlet {
 
     // Recebe os dados enviados por um formulario
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       String login = request.getParameter("login");
-       String password = request.getParameter("password");
-       String url = request.getParameter("url");
+        try {
 
-       if (login != null && !login.isEmpty() && password != null && !password.isEmpty()) {
-           Login modelLogin = new Login();
-           modelLogin.setLogin(login);
-           modelLogin.setPassword(password);
+            String login = request.getParameter("login");
+            String password = request.getParameter("password");
+            String url = request.getParameter("url");
 
-           RequestDispatcher requestDispatcher;
+            if (login != null && !login.isEmpty() && password != null && !password.isEmpty()) {
+                Login modelLogin = new Login();
+                modelLogin.setLogin(login);
+                modelLogin.setPassword(password);
 
-           if (modelLogin.getLogin().equalsIgnoreCase("admin") && modelLogin.getPassword()
-                   .equalsIgnoreCase("admin")) {
-               request.getSession().setAttribute("user", modelLogin.getLogin());
+                RequestDispatcher requestDispatcher;
 
-               request.setAttribute("msg", Message.MESSAGE_SUCCESS_REGISTER);
+                if (loginDaoRepository.validateAuthentication(modelLogin)) {
+                    request.getSession().setAttribute("user", modelLogin.getLogin());
 
-
-               if (url == null || url.equals("null")) {
-                    url = "main/main.jsp";
-               }
-
-               requestDispatcher = request.getRequestDispatcher(url);
-               requestDispatcher.forward(request, response);
+                    request.setAttribute("msg", Message.MESSAGE_SUCCESS_REGISTER);
 
 
+                    if (url == null || url.equals("null")) {
+                        url = "main/main.jsp";
+                    }
+                    requestDispatcher = request.getRequestDispatcher(url);
+                    requestDispatcher.forward(request, response);
 
-           } else {
-               requestDispatcher = request.getRequestDispatcher("/index.jsp");
-               request.setAttribute("message", Message.MESSAGE_ERROR);
-           }
-           requestDispatcher.forward(request, response);
+                } else {
+                    requestDispatcher = request.getRequestDispatcher("/index.jsp");
+                    request.setAttribute("message", Message.MESSAGE_ERROR);
+                }
+                requestDispatcher.forward(request, response);
 
-       } else {
-           RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
-           request.setAttribute("message", Message.MESSAGE_ERROR);
-           requestDispatcher.forward(request, response);
-       }
+            } else {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
+                request.setAttribute("message", Message.MESSAGE_ERROR);
+                requestDispatcher.forward(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -5,6 +5,7 @@ import model.Login;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class LoginDaoRepository {
 
@@ -14,23 +15,26 @@ public class LoginDaoRepository {
         connection = SingleConnection.getConnection();
     }
 
-    public void save(Login login) {
-
-    }
-
     public boolean validateAuthentication(Login modelLogin) {
         try {
-            String sql = "SELECT * FROM model_login WHERE login = ?, senha = ?";
+            String sql = "SELECT * FROM model_login WHERE login = ? AND senha = ? ";
+
             PreparedStatement validateStatement = connection.prepareStatement(sql);
 
+            validateStatement.setString(1, modelLogin.getLogin());
+            validateStatement.setString(2, modelLogin.getPassword());
+
+            ResultSet result = validateStatement.executeQuery();
+
+            if (result.next()) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
-        return false;
+        return true;
     }
 
 }
