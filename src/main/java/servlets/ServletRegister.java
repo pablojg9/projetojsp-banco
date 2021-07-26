@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.LoginDaoRepository;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +15,8 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/main/ServletRegister", "/ServletRegister"})
 public class ServletRegister extends HttpServlet {
 
+    private LoginDaoRepository loginDaoRepository = new LoginDaoRepository();
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -21,21 +24,22 @@ public class ServletRegister extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String loginRegister = request.getParameter("loginRegister");
         String passwordRegister = request.getParameter("passwordRegister");
+        String sendRegistration = request.getParameter("sendRegistration");
         String url = request.getParameter("url");
 
 
         if (loginRegister != null && !loginRegister.isEmpty() && passwordRegister != null && !passwordRegister.isEmpty()) {
             //Instancias
             Login modelLogin = new Login();
-            UserDao userDao = new UserDao();
 
             modelLogin.setLogin(loginRegister);
             modelLogin.setPassword(passwordRegister);
 
             RequestDispatcher requestDispatcher;
 
-            if (modelLogin.getLogin().equalsIgnoreCase("admin") && modelLogin.getPassword()
-                    .equalsIgnoreCase("admin")) {
+
+            loginDaoRepository.registerLogin(modelLogin);
+            if (loginDaoRepository.validateAuthentication(modelLogin)) {
                 request.getSession().setAttribute("userRegister", modelLogin.getLogin());
 
                 if (url == null || url.equals("null")) {

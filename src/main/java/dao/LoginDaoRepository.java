@@ -37,4 +37,26 @@ public class LoginDaoRepository {
         return true;
     }
 
+    public void registerLogin(Login modelLogin) {
+
+        try {
+           String sql = "INSERT INTO model_login (login, senha) VALUES (?, ?)";
+           PreparedStatement registerStatement = connection.prepareStatement(sql);
+
+           registerStatement.setString(1, modelLogin.getLogin());
+           registerStatement.setString(2, modelLogin.getPassword());
+
+           registerStatement.execute();
+           connection.commit();
+
+        }catch (Exception e) {
+            try {
+                connection.rollback();
+            } catch (Exception roll) {
+                roll.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+
+    }
 }

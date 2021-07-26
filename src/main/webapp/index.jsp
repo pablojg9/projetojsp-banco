@@ -19,7 +19,7 @@
                 <td><input name="password" type="password"></td>
             </tr>
             <tr>
-                <td><button name="enviar" type="submit">Enviar</button></td>
+                <td><button name="enviar" type="submit">enviar</button></td>
             </tr>
         </table>
     </form>
