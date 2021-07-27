@@ -70,11 +70,17 @@ public class FilterAuthentication implements Filter {
 
             else {
                 chain.doFilter(request, response);
+
+
             }
             CONNECTION.commit();
 
         } catch (Exception e) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/error.jsp");
+            request.setAttribute("message", e.getMessage());
+            requestDispatcher.forward(request, response);
             e.printStackTrace();
+
             try {
                 CONNECTION.rollback();
             } catch (Exception roll) {

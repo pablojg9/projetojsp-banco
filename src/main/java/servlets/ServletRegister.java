@@ -60,9 +60,5 @@ public class ServletRegister extends HttpServlet {
             request.setAttribute("message", Message.MESSAGE_ERRO_REGISTER);
             requestDispatcher.forward(request, response);
         }
-
-
-
-
     }
 }

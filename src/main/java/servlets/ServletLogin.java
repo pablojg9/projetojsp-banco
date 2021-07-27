@@ -25,7 +25,7 @@ public class ServletLogin extends HttpServlet {
 
     // Recebe os dados pela url em parametros
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     // Recebe os dados enviados por um formulario
@@ -68,6 +68,10 @@ public class ServletLogin extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/error.jsp");
+            request.setAttribute("message", e.getMessage());
+            requestDispatcher.forward(request, response);
+
         }
     }
 }
