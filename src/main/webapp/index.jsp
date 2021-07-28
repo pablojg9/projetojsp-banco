@@ -16,7 +16,7 @@
         <form action="ServletLogin" method="post">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input  name="login" type="email" class="form-control" class="form-check-input" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                <input  name="login" type="text" class="form-control" class="form-check-input" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                 <div id="emailHelp" class="form-text">Coloque o seu email</div>
             </div>
             <div class="mb-3">
