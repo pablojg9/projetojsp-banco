@@ -45,6 +45,7 @@
                                 <div class="page-body">
                                    <h1>Olá, Mundo!</h1>
                                 </div>
+
                                 <!-- Page-body end -->
                             </div>
                             <div id="styleSelector"> </div>
