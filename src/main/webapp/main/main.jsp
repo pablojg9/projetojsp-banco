@@ -12,7 +12,7 @@
 
         <div class="pcoded-main-container">
             <div class="pcoded-wrapper">
-
+                <jsp:include page="navbarmenu.jsp"></jsp:include>
                 <div class="pcoded-content">
                     <!-- Page-header start -->
                     <div class="page-header">
