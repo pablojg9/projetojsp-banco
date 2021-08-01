@@ -66,12 +66,8 @@ public class FilterAuthentication implements Filter {
                 requestRegister.forward(request, response);
                 return;
             }
-
-
             else {
                 chain.doFilter(request, response);
-
-
             }
             CONNECTION.commit();
 
