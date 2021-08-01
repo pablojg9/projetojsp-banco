@@ -65,8 +65,8 @@ public class ServletLogin extends HttpServlet {
                 } else {
                     requestDispatcher = request.getRequestDispatcher("/index.jsp");
                     request.setAttribute("message", Message.MESSAGE_ERROR);
+                    requestDispatcher.forward(request, response);
                 }
-                requestDispatcher.forward(request, response);
 
             } else {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
