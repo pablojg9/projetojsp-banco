@@ -27,7 +27,7 @@
             <button name="enviar" type="submit" class="btn btn-primary">Enviar</button>
         </form>
 
-        <form method="post" action="register.jsp">
+        <form method="post" action="ServletRegister">
             <button type="submit" class="btn btn-success">Cadastrar</button>
         </form>
 

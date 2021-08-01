@@ -53,20 +53,19 @@ public class ServletLogin extends HttpServlet {
                 if (loginDaoRepository.validateAuthentication(modelLogin)) {
                     request.getSession().setAttribute("user", modelLogin.getLogin());
 
-                    request.setAttribute("msg", Message.MESSAGE_SUCCESS_REGISTER);
-
-
                     if (url == null || url.equals("null")) {
                         url = "main/main.jsp";
                     }
                     requestDispatcher = request.getRequestDispatcher(url);
-                    requestDispatcher.forward(request, response);
 
                 } else {
                     requestDispatcher = request.getRequestDispatcher("/index.jsp");
                     request.setAttribute("message", Message.MESSAGE_ERROR);
+
                     requestDispatcher.forward(request, response);
                 }
+                requestDispatcher.forward(request, response);
+
 
             } else {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");

@@ -1,6 +1,7 @@
 package filter;
 
 import connection.SingleConnection;
+import dao.LoginDaoRepository;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -47,7 +48,7 @@ public class FilterAuthentication implements Filter {
             HttpSession hasSession = req.getSession();
 
             String userLogged = (String) hasSession.getAttribute("user");
-            String userRegister = (String) hasSession.getAttribute("userRegister");
+            String userRegister = request.getParameter("userRegister");
 
             String urlAuthenticate = req.getServletPath();//URL está sendo acessado
 
@@ -57,18 +58,9 @@ public class FilterAuthentication implements Filter {
                 request.setAttribute("message", Message.MESSAGE_AUTHENTICATE);
 
                 requestDispatcher.forward(request, response);
-
-
                 return; // Para a execução e redireciona para o login
             }
-            if (userRegister == null && !urlAuthenticate.equalsIgnoreCase("/main/ServletRegister")) {
-                RequestDispatcher requestRegister = request.getRequestDispatcher("/register.jsp?url=" + urlAuthenticate);
-                requestRegister.forward(request, response);
-                return;
-            }
-            else {
-                chain.doFilter(request, response);
-            }
+
             CONNECTION.commit();
 
         } catch (Exception e) {

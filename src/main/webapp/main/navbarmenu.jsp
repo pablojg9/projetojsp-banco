@@ -1,5 +1,3 @@
-<%@ page import="jakarta.servlet.http.HttpServlet" %>
-<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <nav class="pcoded-navbar">
@@ -9,7 +7,8 @@
             <div class="main-menu-header">
                 <img class="img-80 img-radius" src="assets/images/avatar-4.jpg" alt="User-Profile-Image">
                 <div class="user-details">
-                    <span id="more-details"><% request.getSession().getAttribute("user");%><i class="fa fa-caret-down"></i></span>
+                    <% request.getSession().getAttribute("user"); %>
+                    <span id="more-details"><% request.getSession().getAttribute("user"); %><i class="fa fa-caret-down"></i></span>
                 </div>
             </div>
             <div class="main-menu-content">

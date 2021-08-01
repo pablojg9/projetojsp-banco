@@ -21,7 +21,7 @@
                                 <div class="col-md-8">
                                     <div class="page-header-title">
                                         <h5 class="m-b-10">Dashboard</h5>
-                                        <p class="m-b-0">Welcome to <% request.getSession().getAttribute("user"); %></p>
+                                        <p class="m-b-0">Welcome to Mega Able</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -43,9 +43,8 @@
                             <div class="page-wrapper">
                                 <!-- Page-body start -->
                                 <div class="page-body">
-                                   <h1>Olá, Mundo!</h1>
+                                   <h1>Cadastro de usuario<h1>
                                 </div>
-
                                 <!-- Page-body end -->
                             </div>
                             <div id="styleSelector"> </div>
