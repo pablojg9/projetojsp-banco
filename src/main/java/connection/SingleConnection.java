@@ -6,8 +6,8 @@ import java.sql.DriverManager;
 public class SingleConnection {
 
     private static final String URL = "jdbc:postgresql://localhost:5432/bancojsplinux?autoReconnect=true";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "arma1234";
+    private static final String USER = ""; // Usuario de banco 
+    private static final String PASSWORD = ""; // Senha da tabela do banco
 
     private static Connection CONNECTION = null;
 
